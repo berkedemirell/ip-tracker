@@ -1,6 +1,7 @@
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker,Popup, useMap } from "react-leaflet";
+import icon from '/src/images/icon-location.svg'
 import L from 'leaflet'
 /* eslint react/prop-types: 0 */
 
@@ -26,7 +27,7 @@ export const Map = (props) => {
     },
   })
   const newIcon = new LeafIcon({
-    iconUrl: '/src/images/icon-location.svg',
+    iconUrl: icon,
     iconSize: [36,36]
   })
 
