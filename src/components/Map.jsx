@@ -1,6 +1,7 @@
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker,Popup, useMap } from "react-leaflet";
+import L from 'leaflet'
 /* eslint react/prop-types: 0 */
 
 
@@ -20,7 +21,14 @@ export const Map = (props) => {
     const map = useMap();
     map.setView(pos)
   }
-
+  const LeafIcon = L.Icon.extend({
+    option: {
+    },
+  })
+  const newIcon = new LeafIcon({
+    iconUrl: '/src/images/icon-location.svg',
+    iconSize: [36,36]
+  })
 
   return (
     <MapContainer className="z-0" position={!props.fetched ? [36.91019527160444, 30.687093213227005] : [props?.lat, props?.lng]} zoom={13} center={!props.fetched ? [36.91019527160444, 30.687093213227005] : [props?.lat, props?.lng]} style={{height: '450px', width: 'screen'}} scrollWheelZoom={true}>
@@ -28,7 +36,7 @@ export const Map = (props) => {
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
-    <Marker position={!props.fetched ? [36.91019527160444, 30.687093213227005] : [props?.lat, props?.lng]}>
+    <Marker position={!props.fetched ? [36.91019527160444, 30.687093213227005] : [props?.lat, props?.lng]} icon={newIcon}>
       <Popup>
         {props?.data?.isp}
       </Popup>
